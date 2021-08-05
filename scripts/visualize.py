@@ -121,7 +121,7 @@ def scatter_parity(train_true, train_predict, valid_true, valid_predict, element
     elements:
         list of elements to have separate forces plots for
         
-    returns: None
+    returns: Figure
     
     """
     
@@ -137,7 +137,9 @@ def scatter_parity(train_true, train_predict, valid_true, valid_predict, element
         force_plot(train_true, train_predict, ax_list[i], elem, f'Force on training data - {elem}')
         force_plot(valid_true, valid_predict, ax_list[i+1], elem, f'Force on validation data - {elem}')
         i += 2
-        
+    
+    return fig
+    
 
 def get_proportion_lists_vectorized(residuals, y_std, num_bins):
     """
