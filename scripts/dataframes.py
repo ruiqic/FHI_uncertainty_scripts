@@ -182,7 +182,7 @@ def make_forces_res_mean_df(train_in, train_out, valid_in, valid_out, natoms_cut
             pred_forces = oa.arrays["force"]
             dft_forces = ia.arrays["forces"]
             mae = np.mean(np.abs(pred_forces - dft_forces))
-            uncs = np.sqrt(np.abs(oa.arrays["gap_variance_gradient"]))
+            uncs = oa.arrays["std_forces"]
             unc = np.mean(uncs)
             l.append([mae, unc, structure, subset])
     list_addrow(train_in, train_out, "train", l)
