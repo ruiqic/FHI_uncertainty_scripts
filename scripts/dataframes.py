@@ -106,7 +106,7 @@ def make_energy_res_df(train_in, train_out, valid_in, valid_out, natoms_cutoff=5
             pred_energy = ia.info["energy"] / n_atoms
             dft_energy = oa.info["energy"] / n_atoms
             error = pred_energy - dft_energy
-            unc = np.sqrt(oa.info["std_energy"])
+            unc = oa.info["std_energy"] / n_atoms
             l.append([error, unc, structure, subset])
     list_addrow(train_in, train_out, "train", l)
     list_addrow(valid_in, valid_out, "valid", l)

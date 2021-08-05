@@ -1,3 +1,7 @@
+"""
+While in jupyter notebook, use `%matplotlib inline` to make plots show up.
+"""
+
 import ase
 import numpy as np
 import matplotlib.pyplot as plt
@@ -121,7 +125,7 @@ def scatter_parity(train_true, train_predict, valid_true, valid_predict, element
     elements:
         list of elements to have separate forces plots for
         
-    returns: Figure
+    returns: None
     
     """
     
@@ -137,8 +141,7 @@ def scatter_parity(train_true, train_predict, valid_true, valid_predict, element
         force_plot(train_true, train_predict, ax_list[i], elem, f'Force on training data - {elem}')
         force_plot(valid_true, valid_predict, ax_list[i+1], elem, f'Force on validation data - {elem}')
         i += 2
-    
-    return fig
+
     
 
 def get_proportion_lists_vectorized(residuals, y_std, num_bins):
@@ -165,7 +168,7 @@ def get_proportion_lists_vectorized(residuals, y_std, num_bins):
     within_quantile = above_lower * below_upper
     obs_proportions = np.sum(within_quantile, axis=0).flatten() / len(residuals)
 
-    return exp_proportions, obs_proportions, normalized_residuals
+    return exp_proportions, obs_proportions
 
 def plot_calibration(residuals, y_std, num_bins=100):
     """
@@ -215,6 +218,7 @@ def plot_calibration(residuals, y_std, num_bins=100):
              horizontalalignment='right',
              fontsize=12)
     
+    
 def plot_sharpness(stdevs, units="eV/atom"):
     """
     Plot histogram of uncertainties.
@@ -256,7 +260,6 @@ def plot_sharpness(stdevs, units="eV/atom"):
                       horizontalalignment=h_align,
                       fontsize=fontsize)
     
-    
 def plot_energy_parity(energy_df, subset="train"):
     """
     create a energy parity plot with histplot showing densities of points
@@ -268,6 +271,7 @@ def plot_energy_parity(energy_df, subset="train"):
         
     return: None
     """
+
     data = energy_df[energy_df["set"]==subset]
     g = sns.jointplot(x="predicted value", y="dft value", data=data, alpha=0.7, kind="hist", hue="structure", height=6,
                       hue_order=["small", "large"], bins=20, marginal_kws=dict(bins=20, multiple="stack", hue_order=["small", "large"]))
@@ -284,6 +288,7 @@ def plot_energy_parity(energy_df, subset="train"):
     rmse_text = 'RMSE:\n' + str(np.round(_rms['rmse'], 3)) + ' +- ' + str(np.round(_rms['std'], 3)) + 'eV/atom'
     ax.text(0.9, 0.1, rmse_text, transform=ax.transAxes, fontsize='large', horizontalalignment='right', 
                 verticalalignment='bottom')
+    
     
 def plot_forces_parity(forces_df, subset="train", species="C"):
     """
@@ -314,6 +319,7 @@ def plot_forces_parity(forces_df, subset="train", species="C"):
     rmse_text = 'RMSE:\n' + str(np.round(_rms['rmse'], 3)) + ' +- ' + str(np.round(_rms['std'], 3)) + 'eV/Å'
     ax.text(0.9, 0.1, rmse_text, transform=ax.transAxes, fontsize='large', horizontalalignment='right', 
             verticalalignment='bottom')
+    
     
 def uncertainty_residual_scatter(res_df, units="eV", xlim=None, ylim=None):
     """
