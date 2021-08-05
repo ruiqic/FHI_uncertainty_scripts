@@ -1,4 +1,4 @@
-# FHI_uncertainty_scripts
+# FHI uncertainty scripts
 Scripts used for uncertainty quantification for ML-based interatomic potentials.
 This repo is created to collect some useful functions that have been used.
 
