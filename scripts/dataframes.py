@@ -140,7 +140,7 @@ def make_forces_res_df(train_in, train_out, valid_in, valid_out, natoms_cutoff=5
             dft_forces = ia.arrays["forces"]
             pred_forces = oa.arrays["forces"]
             ae = pred_forces - dft_forces
-            uncs = np.sqrt(np.abs(oa.arrays["std_forces"]))
+            uncs = oa.arrays["std_forces"]
             structure = "small" if len(symbols) < natoms_cutoff else "large"
             for i, spec in enumerate(symbols):
                 for j in range(3):
