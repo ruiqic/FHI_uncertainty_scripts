@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 """
 These functions organize ase.Atoms objects into useful dataframes.
 Dataframes are particularly useful for visualization and analysis.
